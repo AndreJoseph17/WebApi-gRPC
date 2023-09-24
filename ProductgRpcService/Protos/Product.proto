@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+option csharp_namespace = "ProductgRpcService.Protos";
+
+service ProductOfferService {
+	rpc GetProductList (Empty) returns (Products);
+	rpc GetProduct (GetProductDetailRequest) returns (ProductDetail);
+	rpc CreateProduct (CreateProductDetailRequest) returns (ProductDetail);
+	rpc UpdateProduct (UpdateProductDetailRequest) returns (ProductDetail);
+	rpc DeleteProduct (DeleteProductDetailRequest) returns (DeleteProductDetailResponse);
+}
+
+message GetProductDetailRequest {
+	int32 productId = 1;
+}
+
+message ProductDetail {
+	int32 Id = 1;
+	string Nombre = 2;
+	string Descripcion = 3;
+	string Precio = 4; 
+}
+
+message CreateProductDetailRequest {
+	ProductDetail product = 1;
+}
+
+message UpdateProductDetailRequest {
+	ProductDetail product = 1;
+}
+
+message DeleteProductDetailRequest {
+	int32 Id = 1;
+}
+
+message DeleteProductDetailResponse {
+	bool isDelete = 1;
+}
+
+message Empty{
+
+}
+
+message Products {
+  repeated ProductDetail items = 1;
+}
